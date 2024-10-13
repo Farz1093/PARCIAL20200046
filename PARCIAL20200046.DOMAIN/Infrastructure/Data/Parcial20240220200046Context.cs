@@ -16,6 +16,8 @@ public partial class Parcial20240220200046Context : DbContext
     {
     }
 
+    public virtual DbSet<AutoParts> AutoParts { get; set; }
+
     public virtual DbSet<Mechanic> Mechanic { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -24,6 +26,13 @@ public partial class Parcial20240220200046Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AutoParts>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Description).HasMaxLength(50);
+            entity.Property(e => e.PartName).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Mechanic>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
