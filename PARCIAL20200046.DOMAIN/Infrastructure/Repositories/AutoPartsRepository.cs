@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PARCIAL20200046.DOMAIN.Core.Entities;
+using PARCIAL20200046.DOMAIN.Core.Interfaces;
 using PARCIAL20200046.DOMAIN.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PARCIAL20200046.DOMAIN.Infrastructure.Repositories
 {
-    public class AutoPartsRepository
+    public class AutoPartsRepository : IAutoPartsRepository
     {
         private readonly Parcial20240220200046Context _dbContext;
 
@@ -50,7 +51,7 @@ namespace PARCIAL20200046.DOMAIN.Infrastructure.Repositories
         public async Task<bool> Delete(int id)
         {
             var autoparts = await GetAutoPartsbyId(id);
-            if (autoparts == null) return false;                         
+            if (autoparts == null) return false;
             int rows = await _dbContext.SaveChangesAsync();
             return rows > 0;
         }

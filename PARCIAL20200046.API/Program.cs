@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using PARCIAL20200046.DOMAIN.Core.Interfaces;
 using PARCIAL20200046.DOMAIN.Infrastructure.Data;
+using PARCIAL20200046.DOMAIN.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IAutoPartsRepository, AutoPartsRepository>();
 
 var app = builder.Build();
 
